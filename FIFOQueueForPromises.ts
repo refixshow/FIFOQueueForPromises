@@ -6,9 +6,10 @@ interface Result {
 
 class FIFOQueueForPromises {
   queueName: string = ""
-  pending = false
+  private pending = false
   // private promises: Promise<Response>[] = [] <--- ADD WITHOUT TESTS
   promises: Promise<unknown>[] = []
+  // private results: Result[] = [] <--- ADD WITHOUT TESTS
   results: Result[] = []
 
   constructor(queueName: string) {
@@ -27,15 +28,20 @@ class FIFOQueueForPromises {
     const minutes = date.getMinutes()
     const hours = date.getHours()
 
+    // create time
     const time = [hours, minutes, seconds, miliseconds].join(";")
 
+    // create result
     const result: Result = {
       promiseResult,
       promiseDoneAt: time,
     }
 
+    // add result
     this.results.push(result)
+    // free incomming promises
     this.pending = false
+    // continue solving
     this.runNext()
   }
 
@@ -78,15 +84,18 @@ class FIFOQueueForPromises {
 
   // get resolved promises
   get() {
+    // check if promises are solved
     if (this.promises.length > 0) {
       throw new Error("Wait until promises solve")
     }
 
+    // create final data
     const solvedQuene = {
       queueName: this.queueName,
       results: this.results,
     }
 
+    // return final data
     return solvedQuene
   }
 }

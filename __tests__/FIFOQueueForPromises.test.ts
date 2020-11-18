@@ -38,7 +38,7 @@ describe("Testing FIFOQueueForPromises", () => {
     expect(mockedCall).toThrow(new Error("Wait until promises solve"))
   })
 
-  it("should return results with good Promises", async (done) => {
+  it("should return results using good promises", async (done) => {
     const MockedClass = new FIFOQueueForPromises("test")
 
     const mockedgoodPromise = goodPromiseCreator(1, 100)
@@ -66,7 +66,7 @@ describe("Testing FIFOQueueForPromises", () => {
     }, 210)
   })
 
-  it("should return results with bad Promises", async (done) => {
+  it("should return results using bad promises", async (done) => {
     const MockedClass = new FIFOQueueForPromises("test")
 
     const mockedBadPromise = badPromiseCreator(1, 100)
@@ -94,7 +94,7 @@ describe("Testing FIFOQueueForPromises", () => {
     }, 210)
   })
 
-  it("should return results with good and bad promises", async (done) => {
+  it("should return results using good and bad promises", async (done) => {
     const MockedClass = new FIFOQueueForPromises("test")
 
     const mockedgoodPromise = goodPromiseCreator(1, 100)
